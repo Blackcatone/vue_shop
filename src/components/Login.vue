@@ -52,11 +52,28 @@ export default {
       
     },
     login(){
-      this.$refs.loginformRef.validate((valid)=>{
-        console.log(valid);
-        
-      })
-    }
+      this.$refs.loginformRef.validate(async(valid)=>{
+        if(!valid) return;
+        const {data:res} =await this.$http.post('login', this.formdata)
+        if(res.meta.status == 200) {
+          this.$message({
+            message: "登录成功",
+            type: 'success',
+            center: true,        
+          })
+          // 将后台 发来的token存到localSession里面
+          window.sessionStorage.setItem('token', res.data.token);
+          this.$router.push("/home");
+        }else{
+          this.$message({
+            message: "登录失败",
+            type: 'error',
+            center: true,                                 
+          });
+        };
+      });
+    },
+    
   },
   components: {
 
