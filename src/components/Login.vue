@@ -73,7 +73,7 @@ export default {
         };
       });
     },
-    
+
   },
   components: {
 
@@ -84,7 +84,13 @@ export default {
 <style lang="scss" scoped>
 .login_contaniner{
   background-color: #5e6875;
+  background-repeat: no-repeat;
   height: 100%;
+  
+  img{
+      width: 100%;
+      height: 100%;
+    }
 }
 
 .login_box{
