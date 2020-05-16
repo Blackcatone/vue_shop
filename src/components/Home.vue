@@ -2,7 +2,9 @@
     <el-container class="home_container">
       <!-- 头部区域 -->
       <el-header>
-        <img src="../assets/images/logo.png" alt="logo">
+      <div class="avatar_box">
+        <img src="../assets/images/Konachan_01_04.gif" alt="logo">
+      </div>
         <span>商城后台管理系统</span>
         <el-button type="info" @click="loginout">退出</el-button>
       </el-header>
@@ -11,7 +13,7 @@
         <!-- 侧边栏 -->
         <el-aside :width="iscollapse ? '64px' : '200px' ">
           <div class="toggle-button" @click="togglecollapse"><i class="el-icon-s-grid"></i></div>
-      <el-menu
+      <el-menu 
       default-active="2"
       background-color="rgb(51,55,68)"
       text-color="#fff"
@@ -110,12 +112,26 @@ export default {
   background-color: rgb(102,102,102);
   color: #ffffff;
   font-size: 20px;
-
-
-  img{
-    width: 70px;
-    height: 70px;
+  span{
+    margin: 0 auto;
   }
+    .avatar_box{
+      height: 50px;
+      width: 50px;
+      background-color: #fff;
+      border: 1px solid #eeeeee;
+      border-radius: 50%;
+      padding: 0px;
+      box-shadow: 0 0 10px #dddddd;
+      position: absolute;
+      left: 0;
+      img{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: #eee;
+      }
+    }
   
 
 }
@@ -138,4 +154,5 @@ export default {
   text-align: center;
   cursor: pointer;
 }
+
 </style>
