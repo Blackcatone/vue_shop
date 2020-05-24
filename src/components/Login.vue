@@ -45,6 +45,10 @@ export default {
       }
     }
   },
+  created:{
+
+    
+  },
   methods:{
     // 登录重置
     resetLoginForm() {
@@ -73,6 +77,7 @@ export default {
         };
       });
     },
+    
 
   },
   components: {
