@@ -6,6 +6,8 @@ import './plugins/element.js'
 import './assets/css/global.css'
 //导入字体图标
 import './assets/font/iconfont.css'
+// A table (with tree-grid) 
+import ZkTable from 'vue-table-with-tree-grid'
 
 import axios from 'axios'
 // 配置api请求根路径
@@ -18,8 +20,9 @@ axios.interceptors.request.use(config => {
 })
 Vue.prototype.$http = axios
 
-
 Vue.config.productionTip = false
+
+Vue.component('tree-table', ZkTable)
 
 new Vue({
   router,

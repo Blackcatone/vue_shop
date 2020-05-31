@@ -14,7 +14,6 @@ export default {
   methods: {
       test: function() {
       let a = 1
-      console.log(a)
       return function() {
         a++
         console.log(a);

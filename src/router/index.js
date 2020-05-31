@@ -6,8 +6,10 @@ import Welcome from '../components/Welcome.vue'
 import Users from '../components/user/Users.vue'
 import Rights from '../components/power/Rights.vue'
 import Roles from '../components/power/Roles.vue'
-import Text from '../components/power/Texe.vue'
-
+import Categories from '../components/goods/Categories.vue'
+import Goods from '../components/goods/Goods.vue'
+import Params from '../components/goods/Params.vue'
+import Texe from '../components/power/Texe.vue'
 
 Vue.use(VueRouter)
 
@@ -15,7 +17,7 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login },
-  { path: '/text', component:Text },
+  { path: '/text', component: Texe},
   {
     path: '/home',
     component: Home,
@@ -25,6 +27,9 @@ const routes = [
       { path: '/users', component: Users },
       { path: '/roles', component: Roles },
       { path: '/rights', component: Rights },
+      { path: '/categories', component: Categories},
+      { path: '/goods', component: Goods},
+      { path: '/params', component: Params}
     ]
   }
 ]
