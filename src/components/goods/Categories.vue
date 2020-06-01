@@ -29,8 +29,8 @@
       </template>
 
       <template slot="opt" slot-scope="scope">
-        <el-button type="primary" icon="el-icon-edit" size="mini">编辑</el-button>
-        <el-button type="danger " icon="el-icon-delete" size="mini">删除</el-button>
+        <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row)">编辑</el-button>
+        <el-button type="danger " icon="el-icon-delete" size="mini" @click="deleteDialgo(scope.row.cat_id)">删除</el-button>
       </template>
 
     </tree-table>
@@ -74,11 +74,32 @@
         </el-form>
 
       <span slot="footer" class="dialog-footer">
-        <el-button @click="addDialogVisible">取 消</el-button>
+        <el-button @click="addDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="addCate">确 定</el-button>
       </span>
     </el-dialog>
-    
+
+    <!-- 编辑分类 -->
+    <el-dialog
+      title="编辑分类"
+      :visible.sync="editDialogVisible"
+      width="50%"
+      @close="editFromClose">
+
+    <el-form ref="editFromRef" :model="editFrom" 
+     :rules="editFormRules" label-width="80px">
+      <el-form-item label="分类">
+        <el-input v-model="editFrom.cat_name" disabled></el-input>
+      </el-form-item>
+      <el-form-item label="编辑分类" prop="cat_name">
+        <el-input v-model="editFromInfo.cat_name"></el-input>
+      </el-form-item>
+    </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="getEditInfo(editFrom.cat_id)">确 定</el-button>
+      </span>
+    </el-dialog>
 
   </div>
 </template>
@@ -145,7 +166,21 @@ export default {
           children: 'children'
         },
         // 获取点击分类id
-        selectedkeys:[]
+        selectedkeys:[],
+        // 控制编辑分类的显示与隐藏
+        editDialogVisible: false,
+        // 编辑分类的数据对象
+        editFrom:[],
+        // 编辑分类表单校验规则
+        editFormRules:{
+          cat_name:[
+            {required:true, message:'请输入分类名称',trogger:'blur'}
+          ]
+        },
+        // 用户修改的用户数据
+        editFromInfo:{
+          cat_name: ''
+        }
     }
   },
   created() {
@@ -223,6 +258,48 @@ export default {
       this.selectedkeys = []
       this.addCateForm.cat_pid = 0
       this.addCateForm.cat_level = 0
+    },
+    // 点击显示编辑分类控件
+    showEditDialog(edit) {      
+      this.editFrom = edit
+      console.log(this.editFrom);
+      
+
+      this.editDialogVisible = true
+    },
+    // 点击发送编辑分类请求
+    async getEditInfo(id) {
+      console.log(id);
+      console.log(this.editFromInfo.cat_name);
+      
+      const {data:res} = await this.$http.put('categories/' + id, 
+      {cat_name:this.editFromInfo.cat_name})
+      if(res.meta.status !== 200){
+        return this.$message.error('编辑分类失败')
+      }
+      this.getCatelist()
+      this.editDialogVisible = false
+    },
+    // // 监听对话框关闭事件，清空表单
+    editFromClose() {
+            this.editFromInfo.cat_name = ''
+    },
+    // 删除分类
+    async deleteDialgo(id) {
+    const isTrue = await this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).catch(error => error)
+        if (isTrue !== 'confirm') {
+          return this.$message.success('已取消删除')
+        }
+        const {data:res} = await this.$http.delete('categories/' + id)
+        if (res.meta.status !==200) {
+          return this.$message.error('删除失败')
+        }
+        this.$message.success('删除分类成功')
+        this.getCatelist()
     }
   }
 }

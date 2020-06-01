@@ -12,12 +12,15 @@ import ZkTable from 'vue-table-with-tree-grid'
 import axios from 'axios'
 // 配置api请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
 // 添加请求拦截器
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
   
   return config
 })
+
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
