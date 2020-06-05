@@ -30,3 +30,16 @@ html, body, #app {
 .el-cascader-menu{
     max-height: 200px;
   }
+
+.el-step__title{
+    font-size: 12px;
+}
+.el-steps--horizontal{
+    margin:20px 0;
+}
+.el-checkbox.is-bordered+.el-checkbox.is-bordered{
+    margin-left: 0;
+}
+.ql-container.ql-snow{
+    min-height: 200px;
+  }

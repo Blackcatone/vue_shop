@@ -92,9 +92,7 @@
             </el-table>
         </el-tab-pane>
       </el-tabs>
-
-      <!-- 分页区域 -->
-
+      
     </el-card>
     <!-- 弹出添加对话框 -->
     <el-dialog

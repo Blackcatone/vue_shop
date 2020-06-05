@@ -9,7 +9,7 @@ import Roles from '../components/power/Roles.vue'
 import Categories from '../components/goods/Categories.vue'
 import Goods from '../components/goods/Goods.vue'
 import Params from '../components/goods/Params.vue'
-import Texe from '../components/power/Texe.vue'
+import AddGoods from '../components/goods/addGoods.vue'
 
 Vue.use(VueRouter)
 
@@ -17,7 +17,6 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login },
-  { path: '/text', component: Texe},
   {
     path: '/home',
     component: Home,
@@ -28,8 +27,9 @@ const routes = [
       { path: '/roles', component: Roles },
       { path: '/rights', component: Rights },
       { path: '/categories', component: Categories},
-      { path: '/goods', component: Goods},
-      { path: '/params', component: Params}
+      { path: '/goods', component: Goods , name: 'goods'},
+      { path: '/params', component: Params},
+      { path: '/goods/add', component: AddGoods, name:'add'}
     ]
   }
 ]
