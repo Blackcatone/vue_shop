@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h3>Welcome</h3>
+    Welcome To My Site
   </div>
 </template>
 
@@ -17,5 +17,10 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss">
+.imgInfo{
+  width: 100%;
+
+}
+
 </style>

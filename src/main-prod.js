@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import './plugins/element.js'
+// import './plugins/element.js'
 //导入全局样式表
 import './assets/css/global.css'
 //导入字体图标
@@ -11,10 +11,8 @@ import ZkTable from 'vue-table-with-tree-grid'
 
 // 导入富文本
 import VueQuillEditor from 'vue-quill-editor'
-
-import 'quill/dist/quill.core.css' // import styles
-import 'quill/dist/quill.snow.css' // for snow theme
-import 'quill/dist/quill.bubble.css' // for bubble theme
+// 
+import NProgress from 'nprogress'
 
 import axios from 'axios'
 // 配置api请求根路径
@@ -23,8 +21,13 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 
 // 添加请求拦截器
 axios.interceptors.request.use(config => {
+  NProgress.start()
   config.headers.Authorization = window.sessionStorage.getItem('token')
   
+  return config
+})
+axios.interceptors.response.use(config => {
+  NProgress.done();
   return config
 })
 
